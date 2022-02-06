@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Install Backend
-apt-get update && apt-get upgrade -y
+apt-get update
 apt-get install php7.4-fpm php7.4-mysql php7.4-xml nginx fcgiwrap composer mariadb-server vim nodejs openssh-server openssh-client curl -y
 mkdir -p /var/www/fusionsuite
 

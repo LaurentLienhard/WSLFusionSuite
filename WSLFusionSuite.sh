@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #Install Backend
+apt-get update && apt-get upgrade -y
 apt-get install php7.4-fpm php7.4-mysql php7.4-xml nginx fcgiwrap composer mariadb-server vim nodejs openssh-server openssh-client curl -y
 mkdir -p /var/www/fusionsuite
 
@@ -15,6 +16,7 @@ echo "root:root123" | chpasswd
 
 cp ./Sources/fusionsuite.conf /etc/nginx/sites-enabled/fusionsuite.conf
 cp ./Sources/phinx.php /var/www/fusionsuite/backend
+cp ./Sources/config.json /var/www/fusionsuite/frontend/www/
 
 service php7.4-fpm start
 service nginx start
@@ -27,8 +29,9 @@ composer install
 cd /var/www/fusionsuite/frontend
 curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
 curl -o- -L https://yarnpkg.com/install.sh | bash \
+
+
 $HOME/.yarn/bin/yarn install
 ./node_modules/.bin/ionic build --prod -- --aot=true --buildOptimizer=true --optimization=true --vendor-chunk=true
 
-cp ./Sources/config.json /var/www/fusionsuite/frontend/www/
 service nginx restart

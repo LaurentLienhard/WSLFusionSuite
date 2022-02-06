@@ -16,7 +16,8 @@ echo "root:root123" | chpasswd
 cp ./Sources/fusionsuite.conf /etc/nginx/sites-enabled/fusionsuite.conf
 cp ./Sources/phinx.php /var/www/fusionsuite/backend
 
+./var/www/fusionsuite/backend/composer install
+
 service php7.4-fpm start
 service nginx start
-
 mysql -uroot -proot123 < ./Sources/configure-mariadb.sql
